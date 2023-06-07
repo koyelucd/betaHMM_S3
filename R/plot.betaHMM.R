@@ -3,7 +3,7 @@ globalVariables(c("Patient_Sample","label","Uncertainty","M","beta_value"))
 #' @description Visualise a \code{\link[betaHMM:betaHMM]{betaHMM}} clustering solution by plotting the fitted and kernel density estimates and the uncertainty.
 #' @details The fitted density estimates can be visualized under the optimal clustering solution by specifying what = "fitted density" and kernel density estimates under the optimal clustering solution by specifying what = "kernel density".
 #' @rdname plot.betaHMM
-#' @export
+#' @exportS3Method plot betaHMM
 #' @seealso \code{\link{betaHMM}}
 #' @param x A \code{\link[betaHMM:betaHMM]{betaHMM}} object.
 #' @param what The different plots that can be obtained are either
@@ -44,6 +44,7 @@ plot.betaHMM<-function(x,
                        treatment_group = NULL,
                        title = NULL,...)
 {
+  #UseMethod("plot")
   object <- x
 
 if(is.null(title))
@@ -187,12 +188,12 @@ if(what == "kernel density")
 }
 if(what=="fitted density")
 {
-  if(is.null(data)){
-    plot_graph=NULL
-    warning("data argument cannot be NULL for generation of fitted density
-            plot.", call. = FALSE)
-  }else
-  {
+  # if(is.null(data)){
+  #   plot_graph=NULL
+  #   warning("data argument cannot be NULL for generation of fitted density
+  #           plot.", call. = FALSE)
+  # }else
+  # {
     # if(object$optimal_model == "K.." || object$optimal_model == "KN.")
     # {
     #
@@ -323,7 +324,7 @@ if(what=="fitted density")
 
     }
 
-  }
+  # }
 
 # }
 # if(threshold==TRUE)
@@ -383,6 +384,7 @@ if(what == "uncertainty")
 }
 
   plot_graph
+
 # if(!is.null(plot_graph))
 # {
 #   if(plot_type=="ggplot")
