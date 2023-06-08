@@ -46,10 +46,10 @@ betaHMM<-function(data,M,N,R,seed=NULL)
   C=nrow(data)
   ## Getting initialized parameters
   trained_params=initialise_parameters(data,M,N,R,seed)
-  print("initialised")
+  #print("initialised")
   ## Baum-Welch algorithm for estimating BHMM parameters
   out_baumwelch = BaumWelch(data,trained_params,M,N,R,seed=seed)
-  print("BW done")
+  #print("BW done")
   out_viterbi=Viterbi(data,M,N,R,out_baumwelch$tau,out_baumwelch$A,
                       out_baumwelch$phi)
 

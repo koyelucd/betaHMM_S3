@@ -41,7 +41,8 @@ dmr_identification<-function(x,diff_meth_cluster,data,legacy_data)
     # Check if the current number is equal to 3
     if (df_dmr[i,11] == diff_meth_cluster) {
 
-      # If this is the start of a new block, save the starting index and set the block length to 1
+      # If this is the start of a new block, save the starting index and
+      #set the block length to 1
       if (block_length == 0) {
         block_start <- i
         block_length <- 1
@@ -63,14 +64,18 @@ dmr_identification<-function(x,diff_meth_cluster,data,legacy_data)
 
       }
 
-      # If the block length is greater than 2, increment the block counter and print the starting and ending index of the block
+      # If the block length is greater than 2,
+      #increment the block counter and print the
+      #starting and ending index of the block
       if (block_length >= 2) {
         block_counter <- block_counter + 1
-        #cat("Block", block_counter, "starts at index", block_start, "and ends at index", i, "\n")
+        #cat("Block", block_counter, "starts at index", block_start,
+        #"and ends at index", i, "\n")
         #mat[block_counter,]<-c(block_counter,block_start,i)
       }
 
-      # If this is not part of a block, reset the block_start and block_length variables
+      # If this is not part of a block, reset the block_start and
+      #block_length variables
     } else {
       if(block_length>=2)
       {

@@ -76,7 +76,7 @@ BaumWelch = function(data,trained_params,M,N,R,n.iter=100,seed=NULL){
     probabilities<-matrix(0, ncol = K, nrow = C)
     probabilities<-prob
 
-    print("1. probabilities calculated")
+    #print("1. probabilities calculated")
 
     ## Generating alpha and beta matrices
     forward_alpha = forward(probabilities, trained_params)
@@ -110,13 +110,13 @@ BaumWelch = function(data,trained_params,M,N,R,n.iter=100,seed=NULL){
       logL <- logL_beta_1
     }
 
-    print("LogL calculated by forward backward")
+    #print("LogL calculated by forward backward")
     ## Calculating the joint and conditional probabilities
 
     eta=matrix(c(0),ncol=K,nrow=C)
     eta=exp(log_alpha+log_beta-logL)
 
-    print("eta calculated")
+    #print("eta calculated")
 
     xi = array(NA, dim=c( (C-1),K, K))
 
@@ -136,7 +136,7 @@ BaumWelch = function(data,trained_params,M,N,R,n.iter=100,seed=NULL){
       }
     }
 
-    print("xi calcultaed")
+    #print("xi calcultaed")
     ## Initial distribution proportions
     tau=eta[1,]
 
@@ -149,7 +149,7 @@ BaumWelch = function(data,trained_params,M,N,R,n.iter=100,seed=NULL){
     A2=apply(A1,FUN = sum,MARGIN = 1)
     A=A1/A2
 
-    print("A calculated")
+    #print("A calculated")
 
     ## Estimating the shape parameters using the digamma approximation approach
 
@@ -181,7 +181,7 @@ BaumWelch = function(data,trained_params,M,N,R,n.iter=100,seed=NULL){
 
     phi <- list(sp_1 = sh_p1, sp_2 = sh_p2)
 
-    print("phi calculated")
+    #print("phi calculated")
 
 
     trained_params$A=A
