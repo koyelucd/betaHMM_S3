@@ -34,36 +34,11 @@ initialise_parameters <- function(data,M,N,R,seed=NULL){
   n2=N
   for(r in 1:R)
   {
-    k_cluster<-stats::kmeans(data[,n1:n2],M)
-    mem <- k_cluster$cluster
-    data_clust<-cbind(data[,n1:n2],mem)
-    x=as.matrix(data_clust)
-    mem=x[,ncol(x)]
-    data_full=x
-    x=x[,-ncol(x)]
-    C=nrow(x)
-    N=ncol(x)
-
-    ## initial model parameters
-    mu=vector("numeric",K)
-    sigma=vector("numeric",K)
-    sigma_sq=vector("numeric",K)
-    alpha=vector("numeric",K)
-    beta=vector("numeric",K)
-    term=vector("numeric",K)
-
-
-    for(k in 1:K)
-    {
-      mu[k]<-mean(x[mem==k,])
-      sigma[k] <- stats::sd(x[mem==k,])
-      term[k]=(mu[k]*(1-mu[k])/(sigma[k]^2))-1
-      alpha[k]=mu[k]*term[k]
-      beta[k]=(1-mu[k])*term[k]
-    }
-
-    # alpha<-samp$optimal_model_results$alpha
-    # delta<-samp$optimal_model_results$delta
+    threshold_out<-threshold_identification(data[,n1:n2],M=3,N,
+                                            parameter_estimation_only=TRUE,
+                                            seed=321)
+    alpha=threshold_out$model_params$phi$sp_1
+    beta=threshold_out$model_params$phi$sp_2
     alpha<-sort(alpha)
     delta<-sort(beta,decreasing = T)
     alpha[2]=1
