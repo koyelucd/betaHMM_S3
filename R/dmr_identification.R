@@ -29,6 +29,7 @@ dmr_identification<-function(x,diff_meth_cluster,data,legacy_data)
 
   C = x$C
   df_dmr<-cbind(data,x$hidden_states)
+  df_dmr$true_dmc<-ifelse(df_dmr[,11] %in% diff_meth_cluster , 1,0)
   block_counter <- 0
   block_start <- 0
   block_end<-0
@@ -39,7 +40,7 @@ dmr_identification<-function(x,diff_meth_cluster,data,legacy_data)
   for (i in 1:length(x$hidden_states)) {
 
     # Check if the current number is equal to 3
-    if (df_dmr[i,11] == diff_meth_cluster) {
+    if (df_dmr[i,12] == 1) {
 
       # If this is the start of a new block, save the starting index and
       #set the block length to 1
